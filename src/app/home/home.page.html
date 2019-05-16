@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chats</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon  slot="icon-only" name="log-out" color="dark"></ion-icon>
+      </ion-button> 
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-button (click)="logout()" >logout</ion-button> -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="showModal()" >
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <!-- <ion-list-header>
+        <ion-label>Conversation</ion-label>
+    </ion-list-header> -->
+    <!-- <ion-item *ngFor="let chat of chats" (click)="openChat(chat)"  text-center button="true">
+      <ion-label color="primary">{{chat.name}}</ion-label>
+    </ion-item> -->
+    <ion-list>
+      <ion-item *ngFor="let chat of chats" (click)="openChat(chat)" (press)="press(chat)" button="true">
+        <ion-label color="primary">{{chat.name}}</ion-label>
+        <ion-icon name="chatboxes" item-end></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+  <div *ngIf="chats.length == 0" text-center justify-content-center> 
+    <ion-label color="primary">You have no chats!</ion-label>
+  </div>
+</ion-content>

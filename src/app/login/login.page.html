@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Welcome to ChatApp!
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="login()">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Login to your account!</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="username" [(ngModel)]="username" placeholder="Username" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input name="password" [(ngModel)]="password" placeholder="Password" type="password" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button type="submit" size="large" [disabled]="form.invalid" expand="block">Login</ion-button>
+          </div>
+          <div text-center>
+            <p>New user? <a (click)="signup()">Click here</a> to signup</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <!-- <div class="ion-padding">
+    <ion-input placeholder="username" [(ngModel)]="username"></ion-input>
+    <ion-input placeholder="password" type="password" [(ngModel)]="password"></ion-input>
+    <ion-button expand="block" (click)="login()">Login</ion-button>
+    <p>New user? <a href="/signup">click here</a> to signup</p>
+  </div> -->
+</ion-content>

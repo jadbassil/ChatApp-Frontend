@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>chatting with {{chat_info.name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button defaultHref="/home" color="dark" slot="start"></ion-back-button>
+      </ion-button> 
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="none" *ngFor="let msg of messages">
+        <div class="chat-message" text-right *ngIf="msg.senderId === userId">
+          <div class="right-bubble">
+            <span class="msg-name">Me</span>
+            <span class="msg-date"> at {{msg.time | date:'short'}}</span>
+            <p text-wrap>{{msg.message}}</p>
+          </div>
+        </div>
+        <div class="chat-message" text-left *ngIf="msg.senderId !== userId">
+          <div class="left-bubble">
+            <span class="msg-name">{{msg.senderName}}</span>
+            <span class="msg-date"> at {{msg.time | date:'short'}}</span>
+            <p text-wrap>{{msg.message}}</p>
+          </div>
+        </div>
+
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <div>
+    <div class="sep"></div>
+    <div class="msg_input">
+        <ion-input  [(ngModel)]="message" placeholder="Enter your message here..."></ion-input>
+    </div>
+    <div class="send_btn">
+        <ion-button (click)="send()">Send</ion-button>
+    </div>    
+  </div>
+</ion-footer>

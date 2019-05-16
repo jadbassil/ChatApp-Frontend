@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button defaultHref="/login" color="dark" slot="start"></ion-back-button>
+      </ion-button> 
+    </ion-buttons>
+    
+
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="register()">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Create your account!</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input  name="username" [(ngModel)]="username" type="text" placeholder="Username"  ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="email" [(ngModel)]="email" type="email" placeholder="your@email.com" ngModel email required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" type="password" [(ngModel)]="password" placeholder="Password (>6 characters)" minlength="6" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="confirm" type="password" [(ngModel)]="password_again" placeholder="Password again" minlength="6" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
