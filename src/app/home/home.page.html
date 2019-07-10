@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>Chats</ion-title>
     <ion-buttons slot="end">
+      <ion-button (click) = toggleSearch()>
+          <ion-icon name="search" color="dark"></ion-icon>
+        </ion-button>
       <ion-button (click)="logout()">
         <ion-icon  slot="icon-only" name="log-out" color="dark"></ion-icon>
       </ion-button> 
@@ -13,6 +16,13 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-searchbar *ngIf="toggled" 
+    [(ngModel)]="searchval" 
+    [showCancelButton]="true" 
+    (ionCancel)="toggleSearch();recoverChats()"
+    (ionClear)="recoverChats()"
+    (ionInput)="searchChat($event)">
+  </ion-searchbar>
   <!-- <ion-button (click)="logout()" >logout</ion-button> -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="showModal()" >
     <ion-fab-button>
@@ -33,7 +43,10 @@
       </ion-item>
     </ion-list>
   </ion-list>
-  <div *ngIf="chats.length == 0" text-center justify-content-center> 
+  <div *ngIf="chats.length == 0 && !toggled" text-center justify-content-center> 
     <ion-label color="primary">You have no chats!</ion-label>
   </div>
+  <div *ngIf="chats.length == 0 && toggled" text-center justify-content-center> 
+      <ion-label color="primary">No Chat found!</ion-label>
+    </div>
 </ion-content>

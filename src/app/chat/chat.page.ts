@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import url from '../url';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { resolve, reject } from 'q';
 
 @Component({
   selector: 'app-chat',
@@ -66,9 +67,6 @@ export class ChatPage implements OnInit {
     });
   }
 
-  sendMessage() {
-    this.stompClient.send("/app/"+this.chat_info.id, {}, this.message+';'+this.userId+';'+this.chat_info.id);
-  }
 
   getMessages(){
     console.log('getting messages');
@@ -85,7 +83,7 @@ export class ChatPage implements OnInit {
       else{
         alert(data.message);
       }
-    }).catch(err => alert(JSON.parse(err)));
+    }).catch(err => console.log(err));
   }
 
   compareFn(msg1, msg2){
@@ -94,9 +92,18 @@ export class ChatPage implements OnInit {
     else return -1;
   }
 
-  send(){
-    if(this.message != "")
+  sendMessage() {
+    return new Promise((resolve, reject) => {
       this.stompClient.send("/app/"+this.chat_info.id, {}, this.message+';'+this.userId+';'+this.chat_info.id);
+      resolve();
+    });
+  }
+
+  send(){
+    if(this.message != ""){
+//      this.stompClient.send("/app/"+this.chat_info.id, {}, this.message+';'+this.userId+';'+this.chat_info.id);
+      this.sendMessage().then(this.getMessages);
+    }
     this.message = "";
   }
 

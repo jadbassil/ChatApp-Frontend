@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit {
         alert('chat added');
         let navigationExtras: NavigationExtras = {
           state: {
-            chat_info: {id: data.id, name: data.name}
+            chat_info: {id: data.id.toString(), name: data.name.toString()}
           },
           replaceUrl: true
         }
